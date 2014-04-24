@@ -26,7 +26,11 @@ func main() {
 	fmt.Println("Creating database...")
 
 	// create new database file and defer closing it
-	db, err := sql.Open("postgres", "user=json dbname=json host=localhost sslmode=disable")
+    dbname := os.Getenv("BMT_DB")
+    dbuser := os.Getenv("BMT_USER")
+    dbpw := os.Getenv("BMT_PW")
+
+	db, err := sql.Open("postgres", "user=" + dbuser + " dbname=" + dbname + " password=" + dbpw + " host=localhost sslmode=disable")
 	if err != nil {
 		fmt.Println(err)
 		return
